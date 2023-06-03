@@ -7,8 +7,6 @@ from Dashboardfunctions.api_fun import *
 # region All Page Functions
 
 
-
-
 @st.cache_data
 def setup_and_getKey():
     """
@@ -23,9 +21,10 @@ def setup_and_getKey():
         st.error("Error building youtube object: ", e)
         st.stop()
 
+
 @st.cache_data
 def convert_df(df):
-   return df.to_csv(index=False).encode('utf-8')
+    return df.to_csv(index=False).encode('utf-8')
 
 # endregion
 
