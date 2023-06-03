@@ -1,9 +1,4 @@
 import streamlit as st
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-import os
-from dotenv import load_dotenv
-from sam_new_func import sam_fun as sf
 from backend import *
 from Dashboardfunctions.api_fun import *
 from Dashboardfunctions.lina_viz2 import *
@@ -14,8 +9,10 @@ from Dashboardfunctions.metrics_samviz import *
 # st.set_page_config(layout="wide")
 youtube = setup_and_getKey()
 
+
 def update_session_state():
     pass
+
 
 # Create an input box on the sidebar for YouTube channel name
 with st.sidebar:
@@ -26,8 +23,10 @@ with st.sidebar:
     channel_name = st.text_input(
         "Enter YouTube Channel Name", value=default_channel_name, on_change=update_session_state())
 
+
 def update_session_state():
     st.session_state.channel_name = channel_name
+
 
 st.title("AVIEW X DataRes - Channel Specific Statistics")
 
@@ -35,7 +34,8 @@ channel = get_channel_specfic_stats(channel_name)
 
 col1, col2 = st.columns(2)
 col1.metric(label="Average duration (min)", value=avg_duration(channel))
-col2.metric(label="Average duration for top videos (min)", value=top_vid_avg_duration(channel))
+col2.metric(label="Average duration for top videos (min)",
+            value=top_vid_avg_duration(channel))
 
 
 @st.cache_data
@@ -56,8 +56,8 @@ visualize_channel_lina1(channel)
 def get_plot_lina2(channel):
     return plot_top_tags(channel)
 
-st.plotly_chart(get_plot_lina2(channel))
 
+st.plotly_chart(get_plot_lina2(channel))
 
 
 st.markdown('#### Top tags of popular videos')
@@ -69,11 +69,11 @@ st.plotly_chart(plot_tag_duration(channel))
 csv = convert_df(channel)
 
 st.download_button(
-   "Download Dataframe",
-   csv,
-   channel_name+"TopVids.csv",
-   "text/csv",
-   key='download-csv'
+    "Download Dataframe",
+    csv,
+    channel_name+"TopVids.csv",
+    "text/csv",
+    key='download-csv'
 )
 
 st.write(channel)
