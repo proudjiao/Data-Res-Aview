@@ -1,13 +1,13 @@
 import streamlit as st
-from sam_new_func import sam_fun as sf
 from backend import *
 from Dashboardfunctions.api_fun import *
-import numpy as np
 from Dashboardfunctions.viz_fun2 import *
 from Dashboardfunctions.metrics_samviz import *
 
+
 def update_conutry_name():
     pass
+
 
 with st.sidebar:
     # region country selection dropdown
@@ -22,10 +22,13 @@ with st.sidebar:
         country_names, index=index, help="Some countries are not supported in YouTube API", on_change=update_conutry_name())
     # endregion
 
+
 def update_conutry_name():
     st.session_state.country_name = selected_country_name
 
-st.title("AVIEW X DataRes - Analysis of Top Youtube Channels in " + selected_country_name)
+
+st.title("AVIEW X DataRes - Analysis of Top Youtube Channels in " +
+         selected_country_name)
 st.subheader(
     "By: Anvesha Dutta, Proud Jiao, Eric Huang, Lina Molla, Olivia Wang, Samantha Wong, Tanya Beri")
 
@@ -63,8 +66,8 @@ with st.sidebar:
     options = unique_topics(homepage_df_filtered)
     selected_category = st.multiselect("Filter by category: ", options)
     if len(selected_category) > 0:
-        homepage_df_filtered = categorize_channels(selected_category, homepage_df_filtered)
-
+        homepage_df_filtered = categorize_channels(
+            selected_category, homepage_df_filtered)
 
 
 # st.write(homepage_df_filtered)
@@ -87,11 +90,11 @@ st.plotly_chart(topic_avg_view_viz_sam(topic_df))
 csv = convert_df(homepage_df_filtered)
 
 st.download_button(
-   "Download Dataframe",
-   csv,
-   "topYoutubeChannelsIn" + selected_country_name + ".csv",
-   "text/csv",
-   key='download-csv'
+    "Download Dataframe",
+    csv,
+    "topYoutubeChannelsIn" + selected_country_name + ".csv",
+    "text/csv",
+    key='download-csv'
 )
 
 st.write(homepage_df_filtered)

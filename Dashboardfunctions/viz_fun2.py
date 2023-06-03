@@ -11,18 +11,13 @@
 # 5) plot_tag_duration(channel_df)
 
 
-import requests
 # from bs4 import BeautifulSoup
 from googleapiclient.discovery import build
-import pandas as pd
 import plotly.express as px
-import re
 from sam_new_func.sam_fun import *
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-import seaborn as sns
 import math
-from datetime import datetime, timedelta
 
 
 ########## scraping from https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#AA############
