@@ -18,11 +18,7 @@ This is a Streamlit web app that provides Youtube trend analysis for top channel
 
 `pipenv install`
 
-4. Install other required dependencies using pip:
-
-`pip install -r [Whatever package is not installed when running streamlit run dashboard.py]`
-
-5. add a `secret.toml` file to folder `.streamlit`
+4. add a `secret.toml` file to folder `.streamlit`
 
 In `secret.toml` file, add
 
@@ -35,14 +31,18 @@ In `secret.toml` file, add
 
 `streamlit run home.py`
 
+If more console outputs "module [\*] not found", install other required dependencies using pip:
+
+`pip install -r [Whatever package is not installed]`
+
 2. If app does not pop up automatically, access the app in your web browser by opening the provided URL (usually http://localhost:8501).
 
 
 ## Folder Structure
 
-- `dashboard.py`:  Main entry point of the Streamlit app.
+- `home.py`:  Main entry point of the Streamlit app.
 - pages/                 # Folder containing subpages
-  - .py ...               # Subpages end in .py
+  - Specific Channel.py ...               # Subpages end in .py
 
 ## Contact
 
