@@ -1,17 +1,14 @@
 # Data-Res-Aview
 
-Main branch has most updated backend functions. 
-For most updated Dashboard please check DashboardOriented branch
-
 ## Streamlit App
 
-This is a Streamlit app that provides Youtube trend analysis for top channel, youtuber, and videos.
+This is a Streamlit web app that provides Youtube trend analysis for top channel by countries and specific channels
 
 ### Installation and Setup
 
 1. Clone the repository: 
 
-`git clone https://github.com/samwong21/Data-Res-Aview.git`
+`git clone https://github.com/proudjiao/Data-Res-Aview.git`
 
 2. Navigate to the project directory:
 
@@ -21,13 +18,9 @@ This is a Streamlit app that provides Youtube trend analysis for top channel, yo
 
 `pipenv install`
 
-4. Install other required dependencies using pip:
+4. add a `secret.toml` file to folder `.streamlit`
 
-`pip install -r [Whatever package is not installed when running streamlit run dashboard.py]`
-
-5. add a `.env` file to folder 
-
-In `.env` file, add
+In `secret.toml` file, add
 
 `YOUTUBE_API_KEY = [YOUR API KEY HERE]`
 
@@ -36,23 +29,23 @@ In `.env` file, add
 
 1. Run the Streamlit app:
 
-`streamlit run dashboard.py`
+`streamlit run home.py`
+
+If more console outputs "module [\*] not found", install other required dependencies using pip:
+
+`pip install -r [Whatever package is not installed]`
 
 2. If app does not pop up automatically, access the app in your web browser by opening the provided URL (usually http://localhost:8501).
 
 
 ## Folder Structure
 
-- `dashboard.py`:  Main entry point of the Streamlit app.
+- `home.py`:  Main entry point of the Streamlit app.
 - pages/                 # Folder containing subpages
-  - .py ...               # Subpages end in .py
-
-## License
-
-[TODO: Specify the license under which your project is distributed].
+  - Specific Channel.py ...               # Subpages end in .py
 
 ## Contact
 
-[TODO: Provide your contact information if users have any questions or feedback].
+jiaop24@g.ucla.edu
 
 
