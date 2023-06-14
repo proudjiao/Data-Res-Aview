@@ -32,10 +32,11 @@ st.title("AVIEW X DataRes - Channel Specific Statistics")
 
 channel = get_channel_specfic_stats(channel_name)
 
-col1, col2 = st.columns(2)
-col1.metric(label="Average duration (min)", value=avg_duration(channel))
+col1, col2, col3 = st.columns(3)
+col1.metric(label="Channel", value=channel.iloc[0]['username'])
 col2.metric(label="Average duration for top videos (min)",
             value=top_vid_avg_duration(channel))
+col3.metric(label="Average duration (min)", value=avg_duration(channel))
 
 
 @st.cache_data
