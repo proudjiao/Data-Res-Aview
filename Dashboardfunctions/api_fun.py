@@ -106,7 +106,7 @@ def pg2_api(youtube, username):
     one_channel_stats = get_video_details(youtube, video_ids)
     one_channel_stats["emails"] = add_emails_sam(
         youtube, channel_id) * len(one_channel_stats)
-    one_channel_stats.insert(0, "username", username)
+    one_channel_stats.insert(0, "channel_username", username)
     return one_channel_stats
 
 
