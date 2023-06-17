@@ -16,6 +16,89 @@ import numpy as np
 import re
 
 
+def trending_videos_by_country(youtube, country):
+    '''
+   Gets data for all trending videos from a specified country
+
+    '''
+    stats_list = []
+    request = youtube.videos().list(
+        part="snippet,contentDetails,status,statistics",
+        chart="mostPopular",
+        regionCode=country,
+        maxResults=50
+    )
+    next_page = True
+    pages = 0
+    while next_page:
+        response = request.execute()
+
+        for video in response["items"]:
+
+            title = video["snippet"]['title']
+            published = video['snippet']['publishedAt']
+            description = video['snippet']['description']
+            # how many tags video has bc 'tags' is a list
+            tags = video["snippet"].get('tags', [])
+            postingDate = video['snippet'].get('publishedAt', None)
+            description = video['snippet'].get('description', None)
+
+            # .get ensures that if the info is unavailable (private etc), it won't throw an error, but put 0
+            viewCount = video["statistics"].get("viewCount", 0)
+            likeCount = video["statistics"].get("likeCount", 0)
+            # dislike count is always private to public I think
+            dislikeCount = video["statistics"].get("dislikeCount", "private")
+            commentCount = video["statistics"].get("commentCount", 0)
+
+            duration = video["contentDetails"].get("duration", 0)
+
+            made_for_kids = video['status'].get('madeForKids', None)
+
+            # makes dictionary for each video with stas
+            stats_dictionary = dict(title=title,
+                                    published=published,
+                                    description=description,
+                                    tags=tags,
+                                    viewCount=viewCount,
+                                    likeCount=likeCount,
+                                    dislikeCount=dislikeCount,
+                                    commentCount=commentCount,
+                                    duration=duration,
+                                    postingDate=postingDate,
+
+
+                                    )
+            stats_list.append(stats_dictionary)
+            return_df = pd.DataFrame(stats_list)
+            return_df.insert(9, "duration(min)",
+                             duration_min(return_df["duration"]))
+            return_df["viewCount"] = return_df["viewCount"].astype(int)
+
+        if "nextPageToken" in response.keys():
+            next_page = True
+            request = youtube.videos().list(
+                part="snippet,contentDetails,status,statistics",
+                chart="mostPopular",
+                regionCode=country,
+                maxResults=50,
+                pageToken=response['nextPageToken']
+            )
+        else:
+            next_page = False
+    return return_df
+
+
+def trending_videos_metrics(trending_video_df):
+    average_views = trending_video_df["viewCount"].astype(int).mean()
+    average_likes = trending_video_df["likeCount"].astype(int).mean()
+    average_duration = trending_video_df["duration(min)"].astype(int).mean()
+
+    # average view count of trending videos
+    # average like count of trending videos
+    # average duration of trending videos in minutes
+    return average_views, average_likes, average_duration
+
+
 def trending_creators_by_country(youtube, country):
     '''
     Gets list of creator IDs of creators who had a video on selected country's trending page

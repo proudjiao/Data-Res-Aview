@@ -3,6 +3,7 @@ import streamlit as st
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from Dashboardfunctions.api_fun import *
+from Dashboardfunctions.sam_fun2 import *
 
 # region All Page Functions
 
@@ -79,7 +80,30 @@ def get_channel_stats(country_name):
         st.error("Error: " + e)
         st.stop()
 
-# endregion
+
+@st.cache_data
+def get_video_stats(country_name):
+    country = get_country_code(country_name)
+    youtube = setup_and_getKey()
+    try:
+        videos_df = trending_videos_by_country(youtube, country)
+        return videos_df
+    except HttpError as e:
+        if e.resp.status == 400:
+            st.write(country_name, " is not currently supported.")
+        if e.resp.status == 403:
+            st.write(
+                "API key quota exceeded. Please wait or upgrade your API key.")
+        st.stop()
+    except Exception as e:
+        st.error("Error: " + e)
+        st.stop()
+    # endregion
+
+
+@st.cache_data
+def get_video_metrics(video_df):
+    return trending_videos_metrics(video_df)
 
 # region Page 2 Functions
 

@@ -34,12 +34,17 @@ st.subheader(
 
 
 homepage_df = get_channel_stats(selected_country_name)
+video_df = get_video_stats(selected_country_name)
+average_views, average_likes, average_duration = get_video_metrics(video_df)
+
 
 # display key metrics for homepage_df
-col1, col2 = st.columns(2)
-col1.metric(label="Average Views", value=avg_views(homepage_df))
-col2.metric(label="Average Subscriber Count", value=avg_subs(homepage_df))
-# col3.metric(label="Most Popular Topic", value=top_topics(topics_df(homepage_df))[0])
+col1, col2, col3 = st.columns(3)
+col1.metric(label="Average Views Of Trending Videos",
+            value=average_views)
+col2.metric(label="Average Likes Of Trending Videos", value=average_likes)
+col3.metric(label="Average Duration (min) Of Trending Videos",
+            value=average_duration)
 
 
 with st.sidebar:
@@ -87,14 +92,26 @@ st.plotly_chart(topic_avg_sub_viz_sam(topic_df))
 st.plotly_chart(topic_avg_view_viz_sam(topic_df))
 
 
-csv = convert_df(homepage_df_filtered)
+csv_homepage_df = convert_df(homepage_df_filtered)
 
 st.download_button(
-    "Download Dataframe",
-    csv,
+    "Download Top Channel Dataframe",
+    csv_homepage_df,
     "topYoutubeChannelsIn" + selected_country_name + ".csv",
     "text/csv",
-    key='download-csv'
+    key='download-csv-1'
 )
 
 st.write(homepage_df_filtered)
+
+csv_video_df = convert_df(video_df)
+
+st.download_button(
+    "Download Top Video Dataframe",
+    csv_video_df,
+    "topVideosIn" + selected_country_name + ".csv",
+    "text/csv",
+    key='download-csv-2'
+)
+
+st.write(video_df)
