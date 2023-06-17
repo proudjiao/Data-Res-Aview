@@ -1,5 +1,6 @@
 import streamlit as st
 from backend import *
+from backend import get_video_stats
 from Dashboardfunctions.api_fun import *
 from Dashboardfunctions.viz_fun2 import *
 from Dashboardfunctions.metrics_samviz import *
