@@ -96,7 +96,7 @@ def trending_videos_metrics(trending_video_df):
     # average view count of trending videos
     # average like count of trending videos
     # average duration of trending videos in minutes
-    return average_views, average_likes, average_duration
+    return '{:,}'.format(round(average_views)), '{:,}'.format(round(average_likes)), '{:,}'.format(average_duration)
 
 
 def trending_creators_by_country(youtube, country):

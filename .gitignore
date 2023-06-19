@@ -7,4 +7,5 @@ dashboard.py
 .DS_Store
 .streamlit/secrets.toml
 __pycache__/
+*/__pycache__/
 ```
