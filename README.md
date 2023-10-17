@@ -4,6 +4,8 @@
 
 This is a Streamlit web app that provides Youtube trend analysis for top channel by countries and specific channels
 
+:point_right: [Link to App](https://youtube-trend.streamlit.app/)
+
 ### Installation and Setup
 
 1. Clone the repository: 
