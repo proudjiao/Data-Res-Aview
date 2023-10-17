@@ -2,7 +2,7 @@
 
 ## Streamlit App
 
-This is a Streamlit web app that provides Youtube trend analysis for top channel by countries and specific channels
+This is a Streamlit web app that provides Youtube trend analysis for top channel by countries and specific channels with live updates!
 
 :point_right: [Link to App](https://youtube-trend.streamlit.app/)
 
