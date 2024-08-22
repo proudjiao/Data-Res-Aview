@@ -13,6 +13,7 @@ plotly = "*"
 pycountry = "*"
 toml = "*"
 google-api-python-client = "*"
+numpy = "<2.0"
 
 [dev-packages]
 
